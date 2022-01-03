@@ -1,0 +1,38 @@
+@import "common.less";
+
+.product-title {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+  padding-bottom: 0px !important;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .img-fit {
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: auto;
+
+    border: 2px solid @primary;
+    border-radius: 10px;
+  }
+}
+
+.bid-container {
+  & > * {
+    margin-right: 10px;
+  }
+}
+
+.ant-divider-horizontal {
+  margin: 20px 0 !important;
+}
+
+.bold {
+  font-weight: 700;
+}

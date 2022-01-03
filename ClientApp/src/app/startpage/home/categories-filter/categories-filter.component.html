@@ -1,0 +1,21 @@
+<ng-container *ngIf="isLoaded; else notLoaded">
+  <div nz-row class="category-container">
+    <div
+      class="category"
+      nz-col
+      nzXs="24"
+      nzSm="8"
+      nzMd="6"
+      class="category"
+      *ngFor="let category of categories"
+      [ngClass]="{ active: category === selectedCategory }"
+      (click)="onFilter(category)"
+    >
+      <i nz-icon [nzType]="category.icon" nzTheme="outline"> </i>
+      <p>{{ category.name }}</p>
+    </div>
+  </div>
+</ng-container>
+<ng-template #notLoaded>
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+</ng-template>

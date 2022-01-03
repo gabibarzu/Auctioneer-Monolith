@@ -1,0 +1,175 @@
+<ng-container *ngIf="isLoaded; else notLoaded">
+  <ng-container *ngIf="product; else productNotFound">
+    <div nz-row [nzGutter]="[50, 50]">
+      <h1 nz-col nzSpan="24" class="product-title">
+        <strong>{{ product.name }}</strong>
+      </h1>
+      <div nz-col nzXs="24" nzLg="12" class="img-container">
+        <img
+          nz-image
+          class="img-fit"
+          [src]="getImage(product)"
+          [alt]="product.name"
+        />
+      </div>
+      <div nz-col nzXs="24" nzLg="12">
+        <div nz-row>
+          <nz-divider nz-col nzSpan="24"></nz-divider>
+          <h3 nz-col nzSpan="24">
+            Current bid: <strong>{{ currentBid - 1 }} €</strong>
+          </h3>
+          <nz-divider nz-col nzSpan="24"></nz-divider>
+          <ng-container *ngIf="product.status != status.InstantSold; else sold">
+            <h3 nz-col nzSpan="24">Time left:</h3>
+            <app-count-down
+              nz-col
+              nzSpan="24"
+              [date]="product.endTime"
+            ></app-count-down>
+            <nz-divider nz-col nzSpan="24"></nz-divider>
+            <h3 nz-col nzSpan="24">Auction ends:</h3>
+            <h3 nz-col nzSpan="24">
+              <strong>{{
+                product.endTime | date: "dd/MM/yyyy hh:mm:ss"
+              }}</strong>
+            </h3>
+            <nz-divider nz-col nzSpan="24"></nz-divider>
+            <h3 nz-col nzSpan="24">Bid for:</h3>
+            <nz-input-number
+              nz-col
+              nzXs="12"
+              nzLg="9"
+              nzXl="6"
+              [(ngModel)]="newBid"
+              [nzMin]="currentBid"
+              [nzStep]="1"
+              [nzSize]="'large'"
+              [nzFormatter]="formatterEuro"
+              [nzParser]="parserEuro"
+            ></nz-input-number>
+            <ng-container *ngIf="isHighestBid(); else buttonWithoutInfo">
+              <a
+                nz-col
+                nzXs="12"
+                nzLg="9"
+                nzXl="6"
+                nz-button
+                nzType="primary"
+                [nzSize]="'large'"
+                nz-popover
+                nzType="primary"
+                nzPopoverTitle="Info"
+                nzPopoverContent="You currently have the highest bid!"
+                [nzPopoverPlacement]="'right'"
+                (click)="bid()"
+              >
+                Bid
+              </a></ng-container
+            ><ng-template #buttonWithoutInfo
+              ><a
+                nz-col
+                nzXs="12"
+                nzLg="9"
+                nzXl="6"
+                nz-button
+                nzType="primary"
+                [nzSize]="'large'"
+                (click)="bid()"
+              >
+                Bid
+              </a>
+            </ng-template>
+            <ng-container *ngIf="showBuySection">
+              <nz-divider nz-col nzSpan="24"></nz-divider>
+              <h3 nz-col nzSpan="24">Skip waiting:</h3>
+              <a
+                nz-col
+                nzXs="24"
+                nzLg="18"
+                nzXl="12"
+                nz-button
+                nzType="primary"
+                [nzSize]="'large'"
+                [nzBlock]="true"
+                (click)="buy()"
+              >
+                Buy now for {{ product.instantPrice }}
+                <i nz-icon nzType="euro"></i>
+              </a>
+            </ng-container>
+          </ng-container>
+          <ng-template #sold>
+            <div nz-col nzSpan="24">
+              <nz-result
+                nzStatus="success"
+                nzTitle="Successfully sold!"
+                nzSubTitle="This product was sold for {{
+                  product.instantPrice
+                }} €."
+              ></nz-result>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div nz-col nzSpan="24">
+        <nz-tabset [nzCentered]="true" [nzSize]="'large'">
+          <nz-tab nzTitle="Description">
+            <div>
+              <h2>
+                <strong>{{ product.name }}</strong>
+              </h2>
+              <h3>{{ product.description }}</h3>
+            </div>
+          </nz-tab>
+          <nz-tab nzTitle="Auction histroty">
+            <ng-container *ngIf="bids && bids.length > 0; else noResults">
+              <div nz-row>
+                <div nz-col nzSpan="24">
+                  <nz-table #bidsTable [nzData]="bids">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Value</th>
+                        <th>Time</th>
+                        <th>User</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let data of bidsTable.data"
+                        [ngClass]="{ bold: data.userId == userId }"
+                      >
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.value }} €</td>
+                        <td>{{ data.time | date: "dd/MM/yyyy hh:mm:ss" }}</td>
+                        <td>
+                          {{ getUserDetails(data.userId) }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </nz-table>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #noResults>
+              <div nz-row nzJustify="space-around" nzAlign="middle">
+                <nz-empty
+                  nzNotFoundContent="There are no bids for this product."
+                ></nz-empty>
+              </div>
+            </ng-template>
+          </nz-tab>
+          <nz-tab nzTitle="Latest deal">
+            <app-latest-deals [deals]="latestDeals"></app-latest-deals>
+          </nz-tab>
+        </nz-tabset>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #productNotFound>
+    <app-product-not-found></app-product-not-found>
+  </ng-template>
+</ng-container>
+<ng-template #notLoaded>
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+</ng-template>

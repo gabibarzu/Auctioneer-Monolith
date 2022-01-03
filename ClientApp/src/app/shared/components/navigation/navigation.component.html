@@ -1,0 +1,18 @@
+<a routerLink="/startpage" class="brand">
+  <img width="30px" height="30px" src="assets/img/logo.png" alt="Logo" />
+  <span>Auctioneer</span>
+</a>
+<ul
+  nz-menu
+  nzTheme="dark"
+  nzMode="horizontal"
+  style="float: right"
+  *ngIf="isLoggedIn | async"
+>
+  <li nz-submenu nzTitle="Account" nzIcon="user">
+    <ul>
+      <a nz-menu-item routerLink="/account/my-bids">My bids</a>
+      <a nz-menu-item [nzDanger]="true" (click)="logout()">Logout</a>
+    </ul>
+  </li>
+</ul>

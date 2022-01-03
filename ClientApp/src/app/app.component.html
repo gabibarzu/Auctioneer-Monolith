@@ -1,6 +1,16 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</body>
+<nz-layout>
+  <nz-header>
+    <app-navigation></app-navigation>
+  </nz-header>
+  <nz-content>
+    <div nz-row>
+      <div
+        nz-col
+        [nzXs]="{ span: 24, offset: 0 }"
+        [nzLg]="{ span: 18, offset: 3 }"
+      >
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>

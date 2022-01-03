@@ -1,0 +1,19 @@
+<ng-container *ngIf="deals && deals.length > 0; else noResults">
+  <div class="deals-container" nz-row [nzGutter]="[30, 30]">
+    <div nz-col nzXs="24" nzSm="12" nzMd="6" *ngFor="let deal of deals">
+      <a
+        [title]="deal.name + ' details'"
+        [routerLink]="['/startpage/product', deal.id]"
+      >
+        <app-product-card [product]="deal"></app-product-card>
+      </a>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noResults>
+  <div nz-row nzJustify="space-around" nzAlign="middle">
+    <nz-empty
+      nzNotFoundContent="There are no products for you filters."
+    ></nz-empty>
+  </div>
+</ng-template>

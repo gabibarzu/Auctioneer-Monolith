@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="login-card">
+    <h1>Login</h1>
+    <form
+      nz-formW
+      [formGroup]="loginForm"
+      class="login-form"
+      (ngSubmit)="submitForm()"
+    >
+      <nz-form-item>
+        <nz-form-control nzErrorTip="This field is mandatory!">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              type="text"
+              nz-input
+              formControlName="userName"
+              placeholder="Username"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="This field is mandatory!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="Password"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <div class="register">
+        Don't have an account?
+        <a routerLink="/authentication/register">Register here!</a>
+      </div>
+      <button
+        nz-button
+        class="login-form-button login-form-margin"
+        [nzType]="'primary'"
+        [nzSize]="'large'"
+        [nzLoading]="isLoading"
+      >
+        <i nz-icon nzType="login" nzTheme="outline"></i>Log in
+      </button>
+    </form>
+  </div>
+</div>

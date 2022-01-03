@@ -1,0 +1,24 @@
+<ng-container *ngIf="isLoaded; else notLoaded">
+  <ng-container *ngIf="products && products.length > 0; else noResults">
+    <div nz-row [nzGutter]="[30, 30]">
+      <div nz-col nzXs="24" nzSm="12" nzMd="6" *ngFor="let product of products">
+        <a
+          [title]="product.name + ' details'"
+          [routerLink]="['/startpage/product', product.id]"
+        >
+          <app-product-card [product]="product"></app-product-card>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noResults>
+    <div nz-row nzJustify="space-around" nzAlign="middle">
+      <nz-empty
+        nzNotFoundContent="There are no products for you filters."
+      ></nz-empty>
+    </div>
+  </ng-template>
+</ng-container>
+<ng-template #notLoaded>
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+</ng-template>
