@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Bid, LatestDeals, SearchCriteria } from './models';
+
+import { Bid } from '../../shared/models';
+import { LatestDeals, SearchCriteria } from './models';
 
 @Injectable({
   providedIn: 'root',

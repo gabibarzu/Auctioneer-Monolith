@@ -27,6 +27,7 @@ namespace Monolith.Services
 
         public List<Product> GetProducts()
         {
+            //TODO increase number
             return this._context.Products
                 .OnlyAvailable()
                 .Take(30)
@@ -71,6 +72,11 @@ namespace Monolith.Services
 
         public List<Product> GetAllBidProducts()
         {
+            if (_httpContextAccessor.HttpContext == null)
+            {
+                return new List<Product>();
+            }
+
             var loggedInUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(User.Id);
             var productIds = this._context.Bids.Where(bid => bid.UserId == loggedInUserId).Select(bid => bid.ProductId).Distinct();
 

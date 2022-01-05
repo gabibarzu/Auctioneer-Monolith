@@ -18,7 +18,7 @@ namespace Monolith.Services
     {
         private readonly DatabaseContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
+
         public BidService(DatabaseContext context, IHttpContextAccessor httpContextAccessor)
         {
             this._context = context;
@@ -42,7 +42,7 @@ namespace Monolith.Services
 
         public bool Bid(Bid bid)
         {
-            if (!ValidateBid(bid))
+            if (!ValidateBid(bid) || _httpContextAccessor.HttpContext == null)
             {
                 return false;
             }
@@ -57,7 +57,7 @@ namespace Monolith.Services
 
         public bool Buy(Bid bid)
         {
-            if (!ValidateBid(bid))
+            if (!ValidateBid(bid) || _httpContextAccessor.HttpContext == null)
             {
                 return false;
             }
@@ -84,6 +84,11 @@ namespace Monolith.Services
 
         private bool ValidateBid(Bid bid)
         {
+            if (_httpContextAccessor.HttpContext == null)
+            {
+                return false;
+            }
+
             var loggedInUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(User.Id);
             if (loggedInUserId != bid.UserId)
             {

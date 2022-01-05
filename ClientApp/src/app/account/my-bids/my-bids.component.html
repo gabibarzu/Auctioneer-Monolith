@@ -1,1 +1,67 @@
-<p>my-bids works!</p>
+<div nz-row nzJustify="space-around" nzAlign="middle">
+  <h1 nz-col>Bids stats</h1>
+</div>
+<nz-divider></nz-divider>
+<ng-container *ngIf="isStatLoaded; else notStatLoaded">
+  <div nz-row [nzGutter]="[30, 30]">
+    <div nz-col nzXs="24" nzSm="12" nzMd="6">
+      <app-stat
+        [icon]="'shopping-cart'"
+        [title]="'Total bids:'"
+        [value]="accountStat.totalNumberOfBids"
+      ></app-stat>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="6">
+      <app-stat
+        [icon]="'rise'"
+        [title]="'Highest bid value:'"
+        [value]="accountStat.highestBid"
+      ></app-stat>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="6">
+      <app-stat
+        [icon]="'fall'"
+        [title]="'Lowest bid value:'"
+        [value]="accountStat.lowestBid"
+      ></app-stat>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="6">
+      <app-stat
+        [icon]="'euro'"
+        [title]="'Total money spent:'"
+        [value]="accountStat.totalMoneySpent"
+      ></app-stat>
+    </div>
+  </div>
+</ng-container>
+<ng-template #notStatLoaded>
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+</ng-template>
+<nz-divider></nz-divider>
+<div nz-row nzJustify="space-around" nzAlign="middle">
+  <h1 nz-col>My bids</h1>
+</div>
+<ng-container *ngIf="areProductsLoaded; else notProductsLoaded">
+  <ng-container *ngIf="products && products.length > 0; else noResults">
+    <div nz-row [nzGutter]="[30, 30]">
+      <div nz-col nzXs="24" nzSm="12" nzMd="6" *ngFor="let product of products">
+        <a
+          [title]="product.name + ' details'"
+          [routerLink]="['/startpage/product', product.id]"
+        >
+          <app-product-card [product]="product"></app-product-card>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noResults>
+    <div nz-row nzJustify="space-around" nzAlign="middle">
+      <nz-empty
+        nzNotFoundContent="There are no products for you filters."
+      ></nz-empty>
+    </div>
+  </ng-template>
+</ng-container>
+<ng-template #notProductsLoaded>
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+</ng-template>

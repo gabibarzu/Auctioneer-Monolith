@@ -28,30 +28,20 @@ const icons: IconDefinition[] = [UserOutline];
 
 /** Load nz modules */
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { SharedModule } from './shared/shared.module';
 
-const nzModules = [
-  NzLayoutModule,
-  NzMenuModule,
-  NzNotificationModule,
-  NzButtonModule,
-  NzResultModule,
-  NzGridModule,
-];
+const nzModules = [NzLayoutModule, NzGridModule];
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, PageNotFoundComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    SharedModule,
     ...nzModules,
-    NzIconModule.forChild(icons),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

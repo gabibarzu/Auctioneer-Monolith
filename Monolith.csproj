@@ -36,9 +36,8 @@
 
   <ItemGroup>
     <Folder Include="Database\" />
-    <Folder Include="Entities\" />
     <Folder Include="DependencyInjection\" />
-    <Folder Include="Services\" />
+    <Folder Include="Entities\Account\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

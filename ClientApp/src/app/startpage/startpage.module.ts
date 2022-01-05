@@ -11,7 +11,6 @@ import { ProductsContainerComponent } from './home/products-container/products-c
 import { ProductComponent } from './product/product.component';
 import { ProductNotFoundComponent } from './product/product-not-found/product-not-found.component';
 
-import { ProductCardComponent } from './shared/components/product-card/product-card.component';
 import { CountDownComponent } from './shared/components/count-down/count-down.component';
 import { LatestDealsComponent } from './shared/components/latest-deals/latest-deals.component';
 import { StartpageService } from './shared/startpage.service';
@@ -64,6 +63,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { SharedModule } from '../shared/shared.module';
 
 const nzModules = [
   NzFormModule,
@@ -87,7 +87,6 @@ const nzModules = [
     HomeComponent,
     CategoriesFilterComponent,
     ProductsContainerComponent,
-    ProductCardComponent,
     CountDownComponent,
     ProductComponent,
     ProductNotFoundComponent,
@@ -97,6 +96,7 @@ const nzModules = [
     CommonModule,
     FormsModule,
     StartpageRoutingModule,
+    SharedModule,
     ...nzModules,
     NzIconModule.forChild(icons),
   ],

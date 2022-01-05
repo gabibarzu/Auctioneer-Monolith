@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { Bid, LatestDeals, Product } from '..';
-import { ProductStatus } from '../shared/models';
+import { Bid, ProductStatus, Product } from '../../shared/models';
+import { LatestDeals } from '../shared/models';
 import { StartpageService } from '../shared/startpage.service';
 
 @Component({

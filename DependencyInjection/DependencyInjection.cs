@@ -19,6 +19,7 @@ namespace Monolith.DependencyInjection
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IDealsService, DealsService>();
             services.AddTransient<IBidService, BidService>();
+            services.AddTransient<IAccountService, AccountService>();
         }
     }
 }

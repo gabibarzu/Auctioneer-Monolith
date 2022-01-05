@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Auctioneer",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -131,6 +131,6 @@
   },
   "defaultProject": "Auctioneer",
   "cli": {
-    "analytics": false
+    "analytics": "231d6d5f-ad70-4140-a2c8-0959617c50ef"
   }
 }

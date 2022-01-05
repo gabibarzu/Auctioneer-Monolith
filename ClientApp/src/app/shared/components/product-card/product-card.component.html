@@ -3,7 +3,6 @@
     [nzTitle]="product.name"
     [nzDescription]="product.description"
   ></nz-card-meta>
-  <app-count-down [date]="product.endTime"></app-count-down>
 </nz-card>
 <ng-template #coverTemplate>
   <img [alt]="product.name" [src]="getImage(product)" />

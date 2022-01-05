@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../models';
+import { Component, Input } from '@angular/core';
+import { Product } from '../../../../shared/models';
 
 @Component({
   selector: 'app-latest-deals',

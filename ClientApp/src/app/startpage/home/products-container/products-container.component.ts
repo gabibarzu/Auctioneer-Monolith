@@ -6,8 +6,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { Category, Product, StartpageService } from '../..';
+
+import { Product } from '../../../shared/models';
 import { SearchCriteria } from '../../shared/models';
+import { Category, StartpageService } from '../..';
 
 @Component({
   selector: 'app-products-container',
