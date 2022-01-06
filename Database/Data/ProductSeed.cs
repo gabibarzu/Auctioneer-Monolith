@@ -13,7 +13,7 @@ namespace Monolith.Database.Data
         {
             var products = new List<Product>();
 
-            const string root = @"..\\Auctioneer-WebApi.Database\Data\Images\";
+            const string root = @"..\\Monolith\Database\Data\Images\";
             var categoryEntries = Directory.GetDirectories(root);
             foreach (var category in categoryEntries)
             {
@@ -44,7 +44,7 @@ namespace Monolith.Database.Data
             var imagesInfo = directoryInfo.GetFiles("*.jpg");
             var images = (from imageInfo in imagesInfo let image = ReadFile(imageInfo.FullName) select (Convert.ToBase64String(image), imageInfo.Name.Split(".jpg")[0])).ToList();
 
-            for (var i = 1; i <= 10; i++)
+            for (var i = 1; i <= 50; i++)
             {
                 var startingPrice = GeneratePrice();
                 var instantPrice = GeneratePrice(startingPrice);
