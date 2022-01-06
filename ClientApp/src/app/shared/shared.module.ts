@@ -18,6 +18,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { RouterModule } from '@angular/router';
 
 const nzModules = [
   NzMenuModule,
@@ -34,7 +35,12 @@ const nzModules = [
     PageNotFoundComponent,
     ProductCardComponent,
   ],
-  imports: [CommonModule, ...nzModules, NzIconModule.forChild(icons)],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ...nzModules,
+    NzIconModule.forChild(icons),
+  ],
   exports: [NavigationComponent, PageNotFoundComponent, ProductCardComponent],
 })
 export class SharedModule {}

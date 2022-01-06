@@ -14,12 +14,12 @@
       </div>
       <div nz-col nzXs="24" nzLg="12">
         <div nz-row>
-          <nz-divider nz-col nzSpan="24"></nz-divider>
-          <h3 nz-col nzSpan="24">
-            Current bid: <strong>{{ currentBid - 1 }} €</strong>
-          </h3>
-          <nz-divider nz-col nzSpan="24"></nz-divider>
           <ng-container *ngIf="product.status != status.InstantSold; else sold">
+            <nz-divider nz-col nzSpan="24"></nz-divider>
+            <h3 nz-col nzSpan="24">
+              Current bid: <strong>{{ currentBid - 1 }} €</strong>
+            </h3>
+            <nz-divider nz-col nzSpan="24"></nz-divider>
             <h3 nz-col nzSpan="24">Time left:</h3>
             <app-count-down
               nz-col

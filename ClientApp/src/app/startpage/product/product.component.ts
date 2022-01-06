@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Bid, ProductStatus, Product } from '../../shared/models';
@@ -31,10 +31,16 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProduct();
+    this.refreshPage();
   }
 
-  getProduct() {
+  refreshPage(): void {
+    this.route.url.subscribe((url) => {
+      this.getProduct();
+    });
+  }
+
+  getProduct(): void {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = routeParams.get('productId') as string;
 
@@ -55,7 +61,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  getLatestDeals() {
+  getLatestDeals(): void {
     const request: LatestDeals = {
       productId: this.product.id,
       categoryId: this.product.categoryId,
@@ -70,7 +76,7 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  getCurrentBidValue() {
+  getCurrentBidValue(): void {
     this.service.getCurrentBidValue(this.product.id).subscribe(
       (result) => {
         this.currentBid = result as number;
@@ -82,7 +88,7 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  getAllBidsForProduct() {
+  getAllBidsForProduct(): void {
     this.service.getAllBidsForProduct(this.product.id).subscribe(
       (result) => {
         this.bids = result as Bid[];
@@ -96,7 +102,7 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  bid() {
+  bid(): void {
     const bid = {
       userId: this.userId,
       productId: this.product.id,
@@ -116,7 +122,7 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  buy() {
+  buy(): void {
     const bid = {
       userId: this.userId,
       productId: this.product.id,
@@ -140,13 +146,13 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  getImage(product: Product) {
+  getImage(product: Product): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       `data:image/png;base64, ${product.image}`
     );
   }
 
-  get showBuySection() {
+  get showBuySection(): boolean {
     if (
       this.product &&
       this.currentBid &&
@@ -157,11 +163,11 @@ export class ProductComponent implements OnInit {
     return true;
   }
 
-  get userId() {
+  get userId(): string {
     return localStorage.getItem('id') ?? '';
   }
 
-  isHighestBid() {
+  isHighestBid(): boolean {
     return (
       this.bids &&
       this.bids.length > 0 &&
@@ -170,7 +176,7 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  getUserDetails(userId: string) {
+  getUserDetails(userId: string): string {
     return this.userId === userId ? 'You' : 'Anonymous';
   }
 }
