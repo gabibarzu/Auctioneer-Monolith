@@ -12,6 +12,7 @@ namespace Monolith.Services.Interfaces
         Product GetProductById(Guid id);
 
         List<Product> GetProductsBySearchCriteria(SearchCriteria request);
+
         List<Product> GetAllBidProducts();
     }
 }
