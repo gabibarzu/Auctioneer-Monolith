@@ -7,13 +7,13 @@ namespace Monolith.Database
 {
     public class DatabaseContext : IdentityDbContext
     {
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    base.OnModelCreating(builder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-        //    builder.Entity<Category>().HasData(Data.CategorySeed.InitialCategories);
-        //    builder.Entity<Product>().HasData(Data.ProductSeed.GenerateProducts());
-        //}
+            builder.Entity<Category>().HasData(Data.CategorySeed.InitialCategories);
+            builder.Entity<Product>().HasData(Data.ProductSeed.GenerateProducts());
+        }
 
         public DatabaseContext(DbContextOptions options) : base(options)
         {
